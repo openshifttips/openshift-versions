@@ -9,9 +9,8 @@ HEADERS = { "accept": "application/json"}
 EMPTYRESPONSE = {'nodes': [], 'edges': []}
 title = "OpenShift 4 latest versions per channel"
 disclaimer = """
-This is an unofficial source.
-</p>Please visit <a href="https://www.openshift.com/">the official site</a>
-to get more information and latest news about OpenShift
+<p>This is an unofficial source</p>
+<p>Please visit <a href="https://www.openshift.com/">the official site</a> to get more information and latest news about OpenShift</p>
 """
 
 # https://hackersandslackers.com/extract-data-from-complex-json-python/

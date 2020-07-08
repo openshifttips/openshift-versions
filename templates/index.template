@@ -6,19 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ title }}</title>
     <script src="sorttable.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
 </head>
 <body>
-  <a class="github-fork-ribbon right bottom fixed" href="https://github.com/e-minguez/openshift-versions" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
-  <h1>{{ latest }}</h1>
-  <table class="sortable">
-    <thead>
+  <a class="github-fork-ribbon" href="https://github.com/e-minguez/openshift-versions" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+  <div class="container">
+  <h1 class="display-1 text-center">{{ latest }}</h1>
+  <table class="table table-striped sortable">
+    <thead class="thead-light">
       <tr><th>Channel</th><th>Latest version</th></tr>
     </thead>
     {% for key, value in versions.items() %}
-    <tr><th>{{ key }}</th><td>{{ value }}</td></tr>
+    <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
     {% endfor %}
   </table>
-  <h2>{{ disclaimer }}</h2>
+  <div class="alert alert-warning" role="alert">
+    {{ disclaimer }}
+  </div>
+</div>
 </body>
 </html>
