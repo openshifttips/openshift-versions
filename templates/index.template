@@ -12,7 +12,7 @@
 <body>
   <a class="github-fork-ribbon" href="https://github.com/e-minguez/openshift-versions" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
   <div class="container">
-  <h1 class="display-1 text-center">{{ latest }}</h1>
+  <h1 class="display-1 text-center">Latest: {{ latest }}</h1>
   <table class="table table-striped sortable">
     <thead class="thead-light">
       <tr><th>Channel</th><th>Latest version</th></tr>
