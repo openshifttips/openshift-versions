@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+    <script src="sorttable.js"></script>
+</head>
+<body>
+  <h1>{{ latest }}</h1>
+  <table class="sortable">
+    <thead>
+      <tr><th>Channel</th><th>Latest version</th></tr>
+    </thead>
+    {% for key, value in versions.items() %}
+    <tr><th>{{ key }}</th><td>{{ value }}</td></tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

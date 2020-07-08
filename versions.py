@@ -1,4 +1,5 @@
 import requests, json, os, re
+from jinja2 import Environment, FileSystemLoader
 
 LATESTVERSION = 5
 URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
@@ -6,8 +7,7 @@ URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
 CHANNELS = ["fast-","stable-","candidate-"]
 HEADERS = { "accept": "application/json"}
 EMPTYRESPONSE = {'nodes': [], 'edges': []}
-
-versions = {}
+title = "OpenShift 4 latest versions per channel"
 
 # https://hackersandslackers.com/extract-data-from-complex-json-python/
 def extract_values(obj, key):
@@ -36,14 +36,43 @@ def natural_sort(l):
     alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
     return sorted(l, key = alphanum_key)
 
-for minor in range(0, LATESTVERSION):
-    for channel in CHANNELS:
-        params = { "channel": channel+"4."+str(minor) }
-        try:
-          page = requests.get(URL,params,headers=HEADERS)
-          page.raise_for_status()
-        except requests.exceptions.HTTPError as err:
-          raise SystemExit(err)
-        if page.json() != EMPTYRESPONSE:
-            versions[channel+"4."+str(minor)] = natural_sort(extract_values(page.json(), 'version'))[-1]
-print(json.dumps(versions, indent=4, sort_keys=True))
+def get_versions():
+    versions = {}
+    for minor in range(0, LATESTVERSION):
+        for channel in CHANNELS:
+            params = { "channel": channel+"4."+str(minor) }
+            try:
+              page = requests.get(URL,params,headers=HEADERS)
+              page.raise_for_status()
+            except requests.exceptions.HTTPError as err:
+              raise SystemExit(err)
+            if page.json() != EMPTYRESPONSE:
+                versions[channel+"4."+str(minor)] = natural_sort(extract_values(page.json(), 'version'))[-1]
+    return dict(sorted(versions.items(), key = lambda kv:kv[0]))
+
+# Open the previous json data
+try:
+  with open('versions.json') as json_file:
+    previous = json.load(json_file)
+except:
+  previous = {}
+
+currentvers = get_versions()
+
+# If the results are the same, do nothing
+if previous == currentvers:
+  print("Dupe")
+  exit()
+# Otherwise, save the file for next execution and continue
+else:
+  with open('versions.json','w') as json_file:
+    json_file.write(json.dumps(currentvers,sort_keys=True))
+
+file_loader = FileSystemLoader('templates')
+env = Environment(loader=file_loader)
+template = env.get_template('index.template')
+
+latest = currentvers[list({k: v for k, v in currentvers.items() if k.startswith('fast-')})[-1]]
+
+with open('index.html','w') as output_file:
+    output_file.write(template.render(title=title,versions=currentvers,latest=latest))
