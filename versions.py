@@ -8,6 +8,11 @@ CHANNELS = ["fast-","stable-","candidate-"]
 HEADERS = { "accept": "application/json"}
 EMPTYRESPONSE = {'nodes': [], 'edges': []}
 title = "OpenShift 4 latest versions per channel"
+disclaimer = """
+This is an unofficial source.
+</p>Please visit <a href="https://www.openshift.com/">the official site</a>
+to get more information and latest news about OpenShift
+"""
 
 # https://hackersandslackers.com/extract-data-from-complex-json-python/
 def extract_values(obj, key):
@@ -75,4 +80,4 @@ template = env.get_template('index.template')
 latest = currentvers[list({k: v for k, v in currentvers.items() if k.startswith('fast-')})[-1]]
 
 with open('index.html','w') as output_file:
-    output_file.write(template.render(title=title,versions=currentvers,latest=latest))
+    output_file.write(template.render(title=title,versions=currentvers,latest=latest,disclaimer=disclaimer))

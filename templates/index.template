@@ -17,5 +17,6 @@
     <tr><th>{{ key }}</th><td>{{ value }}</td></tr>
     {% endfor %}
   </table>
+  <h2>{{ disclaimer }}</h2>
 </body>
 </html>
