@@ -1,8 +1,13 @@
 import requests, json, os, re
 
+LATESTVERSION = 5
 URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
-PARAMS = { "channel": "stable-4.4"}
+# https://github.com/openshift/cincinnati-graph-data/tree/master/channels
+CHANNELS = ["fast-","stable-","candidate-"]
 HEADERS = { "accept": "application/json"}
+EMPTYRESPONSE = {'nodes': [], 'edges': []}
+
+versions = {}
 
 # https://hackersandslackers.com/extract-data-from-complex-json-python/
 def extract_values(obj, key):
@@ -31,18 +36,14 @@ def natural_sort(l):
     alphanum_key = lambda key: [ convert(c) for c in re.split('([0-9]+)', key) ] 
     return sorted(l, key = alphanum_key)
 
-try:
-  page = requests.get(URL,PARAMS,headers=HEADERS)
-  page.raise_for_status()
-except requests.exceptions.HTTPError as err:
-  raise SystemExit(err)
-
-print(natural_sort(extract_values(page.json(), 'version'))[-1])
-
-# values = page.json()
-# latestversion = natural_sort(extract_values(values, 'version'))[-1]
-# 
-# lv = [v for v in values["nodes"] if v["version"] == latestversion]
-# print(lv[-1])
-# 
-# print(latestversion)
+for minor in range(0, LATESTVERSION):
+    for channel in CHANNELS:
+        params = { "channel": channel+"4."+str(minor) }
+        try:
+          page = requests.get(URL,params,headers=HEADERS)
+          page.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+          raise SystemExit(err)
+        if page.json() != EMPTYRESPONSE:
+            versions[channel+"4."+str(minor)] = natural_sort(extract_values(page.json(), 'version'))[-1]
+print(json.dumps(versions, indent=4, sort_keys=True))
