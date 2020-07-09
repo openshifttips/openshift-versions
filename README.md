@@ -2,6 +2,8 @@
 
 Run the python script to generate an html page with the list of the latest OpenShift 4 versions.
 
+See it live at [versions.openshift.tips](http://versions.openshift.tips)
+
 ## Install
 
 ```bash
