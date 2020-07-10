@@ -1,10 +1,9 @@
 import requests, json, os, re
 from jinja2 import Environment, FileSystemLoader
 
-LATESTVERSION = 5
 URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
 # https://github.com/openshift/cincinnati-graph-data/tree/master/channels
-CHANNELS = ["fast-","stable-","candidate-"]
+CHANNELS = ["fast-4.","stable-4.","candidate-4."]
 HEADERS = { "accept": "application/json"}
 EMPTYRESPONSE = {'nodes': [], 'edges': []}
 title = "OpenShift 4 latest versions per channel"
@@ -42,16 +41,23 @@ def natural_sort(l):
 
 def get_versions():
     versions = {}
-    for minor in range(0, LATESTVERSION):
-        for channel in CHANNELS:
-            params = { "channel": channel+"4."+str(minor) }
-            try:
-              page = requests.get(URL,params,headers=HEADERS)
-              page.raise_for_status()
-            except requests.exceptions.HTTPError as err:
-              raise SystemExit(err)
-            if page.json() != EMPTYRESPONSE:
-                versions[channel+"4."+str(minor)] = natural_sort(extract_values(page.json(), 'version'))[-1]
+    failed = 0
+    minor = 0
+    # If 3 empty responses, meaning, no channels for the minor release
+    while failed < len(CHANNELS):
+      failed = 0
+      for channel in CHANNELS:       
+        params = { "channel": channel+str(minor) }
+        try:
+          page = requests.get(URL,params,headers=HEADERS)
+          page.raise_for_status()
+        except requests.exceptions.HTTPError as err:
+          raise SystemExit(err)
+        if page.json() != EMPTYRESPONSE:
+          versions[channel+str(minor)] = natural_sort(extract_values(page.json(), 'version'))[-1]
+        else:
+          failed += 1
+      minor += 1
     return dict(sorted(versions.items(), key = lambda kv:kv[0]))
 
 # Open the previous json data
