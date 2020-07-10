@@ -26,7 +26,7 @@
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/release.txt">{{ value }}</a></td>
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-linux.tar.gz">oc (x86_64 Linux)</a></td>
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-mac.tar.gz">oc (OSX)</a></td>
-      <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-windows.tar.gz">oc (Windows)</a></td>
+      <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-windows.zip">oc (Windows)</a></td>
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-install-linux.tar.gz">openshift-install (x86_64 Linux)</a></td>
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-install-mac.tar.gz">openshift-install (OSX)</a></td>
     </tr>
