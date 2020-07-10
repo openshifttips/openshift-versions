@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ title }}</title>
-    <script src="sorttable.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.3/gh-fork-ribbon.min.css" />
 </head>
@@ -13,7 +12,7 @@
   <a class="github-fork-ribbon" href="https://github.com/e-minguez/openshift-versions" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
   <div class="container">
   <h1 class="display-1 text-center">Latest: {{ latest }}</h1>
-  <table class="table table-striped sortable">
+  <table class="table table-striped">
     <thead class="thead-light">
       <tr><th>Channel</th><th>Latest version</th></tr>
     </thead>
