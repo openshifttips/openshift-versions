@@ -12,25 +12,23 @@
   <a class="github-fork-ribbon" href="https://github.com/e-minguez/openshift-versions" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
   <div class="container">
   <h1 class="display-1 text-center">Latest: <a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ latest }}/">{{ latest }}</a></h1>
-  <table class="table table-striped">
-    <thead class="thead-light">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
       <tr>
-        <th>Channel</th>
-        <th>Latest version</th>
-        <th>Clients</th>
+        <th scope="col">Channel</th>
+        <th scope="col">Latest</th>
+        <th scope="col" colspan="6" class="text-center">Clients</th>
       </tr>
     </thead>
     {% for key, value in versions.items() %}
     <tr>
       <td>{{ key }}</td>
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/release.txt">{{ value }}</a></td>
-      <td>
-        <a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-linux.tar.gz">oc (x86_64 Linux)</a> |
-        <a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-mac.tar.gz">oc (OSX)</a> |
-        <a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-windows.tar.gz">oc (Windows)</a> |
-        <a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-install-linux.tar.gz">openshift-install (x86_64 Linux)</a> |
-        <a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-install-mac.tar.gz">openshift-install (OSX)</a>
-      </td>
+      <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-linux.tar.gz">oc (x86_64 Linux)</a></td>
+      <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-mac.tar.gz">oc (OSX)</a></td>
+      <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-windows.tar.gz">oc (Windows)</a></td>
+      <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-install-linux.tar.gz">openshift-install (x86_64 Linux)</a></td>
+      <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-install-mac.tar.gz">openshift-install (OSX)</a></td>
     </tr>
     {% endfor %}
   </table>
