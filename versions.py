@@ -42,7 +42,7 @@ def natural_sort(l):
 def get_versions():
     versions = {}
     failed = 0
-    minor = 0
+    minor = 1
     # If 3 empty responses, meaning, no channels for the minor release
     while failed < len(CHANNELS):
       failed = 0
