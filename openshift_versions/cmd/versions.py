@@ -30,7 +30,8 @@ EMPTYRESPONSE = {'nodes': [], 'edges': []}
 TITLE = "OpenShift 4 latest versions per channel"
 DISCLAIMER = """
 <p>This is an unofficial source</p>
-<p>Please visit <a href="https://www.openshift.com/">the official site</a> to get more information and latest news about OpenShift</p>
+<p>Please visit <a href="https://www.openshift.com/">the official site</a>
+to get more information and latest news about OpenShift</p>
 """
 
 
@@ -78,7 +79,8 @@ def get_versions():
             except requests.exceptions.HTTPError as err:
                 raise SystemExit(err)
             if page.json() != EMPTYRESPONSE:
-                versions[channel + str(minor)] = natural_sort(extract_values(page.json(), 'version'))[-1]
+                versions[channel + str(minor)] = natural_sort(
+                    extract_values(page.json(), 'version'))[-1]
             else:
                 failed += 1
         minor += 1
@@ -103,15 +105,20 @@ def main():
         with open('versions.json', 'w') as json_file:
             json_file.write(json.dumps(currentvers, sort_keys=True))
 
-    templates_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'templates')
+    templates_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),
+                                 'templates')
     file_loader = jinja2.FileSystemLoader(templates_dir)
     env = jinja2.Environment(loader=file_loader)
     template = env.get_template('index.template')
 
-    latest = currentvers[list({k: v for k, v in currentvers.items() if k.startswith('fast-')})[-1]]
+    latest = currentvers[list(
+        {k: v for k, v in currentvers.items() if k.startswith('fast-')})[-1]]
 
     with open('index.html', 'w') as output_file:
-        output_file.write(template.render(title=TITLE, versions=currentvers, latest=latest, disclaimer=DISCLAIMER))
+        output_file.write(template.render(title=TITLE,
+                                          versions=currentvers,
+                                          latest=latest,
+                                          disclaimer=DISCLAIMER))
 
 
 if __name__ == "__main__":
