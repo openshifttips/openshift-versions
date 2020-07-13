@@ -2,6 +2,4 @@
 # of appearance. Changing the order has an impact on the overall integration
 # process.
 
-pbr!=2.1.0,>=2.0.0 # Apache-2.0
-Jinja2>=2.11.2 # BSD-3-Clause
-requests>=2.18.0 # Apache-2.0
+hacking>=3.0.1,<3.1.0 # Apache-2.0
