@@ -35,6 +35,9 @@
   <div class="alert alert-warning" role="alert">
     {{ disclaimer }}
   </div>
+  <div class="alert alert-light" role="alert">
+    Last modification: {{ mod_date }}
+  </div>
 </div>
 </body>
 </html>

@@ -20,6 +20,8 @@ import sys
 
 import jinja2
 
+from datetime import datetime
+
 
 URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
 # https://github.com/openshift/cincinnati-graph-data/tree/master/channels
@@ -114,11 +116,14 @@ def main():
     latest = currentvers[list(
         {k: v for k, v in currentvers.items() if k.startswith('fast-')})[-1]]
 
+    mod_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
     with open('index.html', 'w') as output_file:
         output_file.write(template.render(title=TITLE,
+                                          disclaimer=DISCLAIMER,
                                           versions=currentvers,
                                           latest=latest,
-                                          disclaimer=DISCLAIMER))
+                                          mod_date=mod_date))
 
 
 if __name__ == "__main__":
