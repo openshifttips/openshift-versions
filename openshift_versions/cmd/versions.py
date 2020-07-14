@@ -14,13 +14,13 @@
 
 import json
 import os
-import re
 import requests
 import sys
 
 import jinja2
 
 from datetime import datetime
+from packaging import version
 
 
 URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
@@ -59,13 +59,6 @@ def extract_values(obj, key):
     return results
 
 
-# https://stackoverflow.com/a/4836734/491522
-def natural_sort(l):
-    convert = lambda text: int(text) if text.isdigit() else text.lower()
-    alphanum_key = lambda key: [convert(c) for c in re.split('([0-9]+)', key)]
-    return sorted(l, key=alphanum_key)
-
-
 def get_versions():
     versions = {}
     failed = 0
@@ -81,8 +74,10 @@ def get_versions():
             except requests.exceptions.HTTPError as err:
                 raise SystemExit(err)
             if page.json() != EMPTYRESPONSE:
-                versions[channel + str(minor)] = natural_sort(
-                    extract_values(page.json(), 'version'))[-1]
+                versions[channel + str(minor)] = sorted(
+                    extract_values(
+                        page.json(), 'version'),
+                    key=lambda x: version.Version(x))[-1]
             else:
                 failed += 1
         minor += 1

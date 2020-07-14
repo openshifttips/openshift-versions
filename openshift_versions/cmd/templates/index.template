@@ -22,7 +22,7 @@
     </thead>
     {% for key, value in versions.items() %}
     <tr>
-      <td>{{ key }}</td>
+      <td><a href="https://raw.githubusercontent.com/openshift/cincinnati-graph-data/master/channels/{{ key }}.yaml">{{ key }}</a></td>
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/release.txt">{{ value }}</a></td>
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-linux.tar.gz">oc (x86_64 Linux)</a></td>
       <td><a href="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/{{ value }}/openshift-client-mac.tar.gz">oc (OSX)</a></td>
