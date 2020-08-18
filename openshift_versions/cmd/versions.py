@@ -18,10 +18,9 @@ import requests
 import sys
 
 import jinja2
+import semantic_version
 
 from datetime import datetime
-from packaging import version
-
 
 URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
 # https://github.com/openshift/cincinnati-graph-data/tree/master/channels
@@ -77,7 +76,7 @@ def get_versions():
                 versions[channel + str(minor)] = sorted(
                     extract_values(
                         page.json(), 'version'),
-                    key=lambda x: version.Version(x))[-1]
+                    key=lambda x: semantic_version.Version(x))[-1]
             else:
                 failed += 1
         minor += 1
