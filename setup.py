@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright (c) 2013 Hewlett-Packard Development Company, L.P.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,6 +25,4 @@ try:
 except ImportError:
     pass
 
-setuptools.setup(
-    setup_requires=['pbr'],
-    pbr=True)
+setuptools.setup(setup_requires=["pbr"], pbr=True)
