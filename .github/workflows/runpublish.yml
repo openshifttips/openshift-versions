@@ -16,10 +16,20 @@ jobs:
     # Use GitHub Actions' cache to shorten build times and decrease load on servers
     - uses: actions/cache@v2.1.0
       with:
-        path: ~/.cache/pip
+        path: |
+          ~/.cache/pip
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements/*') }}
         restore-keys: |
           ${{ runner.os }}-pip-
+
+    - uses: actions/cache@v2.1.0
+      with:
+        path: |
+          versions.json
+          index.html
+        key: ${{ runner.os }}-versionsjson-${{ hashFiles('**/versions.json/*') }}
+        restore-keys: |
+          ${{ runner.os }}-versionsjson-
 
     - uses: iranzo/gh-action-runpublish@0.0.2
       env:
