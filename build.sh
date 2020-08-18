@@ -8,3 +8,4 @@ python ./openshift_versions/cmd/versions.py
 
 # Always copy the resulting file to have a populated web server (even if it's the same)
 cp index.html content/
+[-f CNAME] && cp CNAME content/
