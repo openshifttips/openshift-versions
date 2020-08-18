@@ -2,7 +2,7 @@
 # of appearance. Changing the order has an impact on the overall integration
 # process.
 
-pbr!=2.1.0,>=2.0.0 # Apache-2.0
 Jinja2>=2.11.2 # BSD-3-Clause
+pbr!=2.1.0,>=2.0.0 # Apache-2.0
 requests>=2.18.0 # Apache-2.0
 semantic-version>=2.8.5 # Apache-2.0

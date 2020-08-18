@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2020 Eduardo Minguez.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +27,7 @@ URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
 # https://github.com/openshift/cincinnati-graph-data/tree/master/channels
 CHANNELS = ["fast-4.", "stable-4.", "candidate-4."]
 HEADERS = {"accept": "application/json"}
-EMPTYRESPONSE = {'nodes': [], 'edges': []}
+EMPTYRESPONSE = {"nodes": [], "edges": []}
 
 TITLE = "OpenShift 4 latest versions per channel"
 DISCLAIMER = """
@@ -74,9 +75,9 @@ def get_versions():
                 raise SystemExit(err)
             if page.json() != EMPTYRESPONSE:
                 versions[channel + str(minor)] = sorted(
-                    extract_values(
-                        page.json(), 'version'),
-                    key=lambda x: semantic_version.Version(x))[-1]
+                    extract_values(page.json(), "version"),
+                    key=lambda x: semantic_version.Version(x),
+                )[-1]
             else:
                 failed += 1
         minor += 1
@@ -86,7 +87,7 @@ def get_versions():
 def main():
     # Open the previous json data
     try:
-        with open('versions.json') as json_file:
+        with open("versions.json") as json_file:
             previous = json.load(json_file)
     except Exception:
         previous = {}
@@ -98,26 +99,32 @@ def main():
         sys.exit("Dupe")
     # Otherwise, save the file for next execution and continue
     else:
-        with open('versions.json', 'w') as json_file:
+        with open("versions.json", "w") as json_file:
             json_file.write(json.dumps(currentvers, sort_keys=True))
 
-    templates_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                 'templates')
+    templates_dir = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)), "templates"
+    )
     file_loader = jinja2.FileSystemLoader(templates_dir)
     env = jinja2.Environment(loader=file_loader)
-    template = env.get_template('index.template')
+    template = env.get_template("index.template")
 
-    latest = currentvers[list(
-        {k: v for k, v in currentvers.items() if k.startswith('fast-')})[-1]]
+    latest = currentvers[
+        list({k: v for k, v in currentvers.items() if k.startswith("fast-")})[-1]
+    ]
 
     mod_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-    with open('index.html', 'w') as output_file:
-        output_file.write(template.render(title=TITLE,
-                                          disclaimer=DISCLAIMER,
-                                          versions=currentvers,
-                                          latest=latest,
-                                          mod_date=mod_date))
+    with open("index.html", "w") as output_file:
+        output_file.write(
+            template.render(
+                title=TITLE,
+                disclaimer=DISCLAIMER,
+                versions=currentvers,
+                latest=latest,
+                mod_date=mod_date,
+            )
+        )
 
 
 if __name__ == "__main__":

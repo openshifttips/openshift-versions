@@ -1,0 +1,37 @@
+name: Run build.sh and publish to GHPages
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron:  '0 * * * *'
+
+jobs:
+  runpublish:
+    runs-on: ubuntu-16.04
+    steps:
+    - uses: actions/checkout@v2
+
+    # Use GitHub Actions' cache to shorten build times and decrease load on servers
+    - uses: actions/cache@v2.1.0
+      with:
+        path: |
+          ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements/*') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - uses: actions/cache@v2.1.0
+      with:
+        path: |
+          versions.json
+          index.html
+        key: ${{ runner.os }}-versionsjson-${{ hashFiles('**/versions.json/*') }}
+        restore-keys: |
+          ${{ runner.os }}-versionsjson-
+
+    - uses: iranzo/gh-action-runpublish@0.0.2
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        SOURCE_FOLDER: content
