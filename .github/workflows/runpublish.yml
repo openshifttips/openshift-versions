@@ -31,7 +31,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-versionsjson-
 
-    - uses: iranzo/gh-action-runpublish@0.0.3
+    - uses: iranzo/gh-action-runpublish@0.0.4
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         SOURCE_FOLDER: content
