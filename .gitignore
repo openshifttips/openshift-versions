@@ -132,3 +132,4 @@ dmypy.json
 versions.json
 index.html
 output/
+.history/
