@@ -26,7 +26,6 @@ jobs:
       with:
         path: |
           versions.json
-          index.html
         key: ${{ runner.os }}-versionsjson-${{ hashFiles('**/versions.json/*') }}
         restore-keys: |
           ${{ runner.os }}-versionsjson-

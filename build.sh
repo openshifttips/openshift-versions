@@ -1,11 +1,11 @@
 #!/bin/bash
 
-mkdir -p content
 pip install -r requirements.txt
 
 # Versions.json and index.html will only be updated if there's a new version, older ones restored from cache
 
 if python ./openshift_versions/cmd/versions.py; then
+    mkdir -p content
     # Copy the resulting file to have a populated web server (even if it's the same)
     cp index.html content/
 
@@ -25,4 +25,6 @@ if python ./openshift_versions/cmd/versions.py; then
     git push deploy $remote_branch --force
     rm -fr .git
     cd ../
+else
+    echo "--- versions.json not updated ---"
 fi
