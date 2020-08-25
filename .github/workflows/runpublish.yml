@@ -26,8 +26,8 @@ jobs:
       with:
         path: |
           versions.json
-        key: ${{ runner.os }}-versionsjson-${{ hashFiles('**/versions.json/*') }}	
-        restore-keys: |	
+        key: ${{ runner.os }}-versionsjson-${{ hashFiles('**/versions.json/*') }}
+        restore-keys: |
           ${{ runner.os }}-versionsjson-
 
     - uses: iranzo/gh-action-runpublish@0.0.4
