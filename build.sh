@@ -1,9 +1,11 @@
 #!/bin/bash
 
-echo '=================== Previous versions.json ==================='
-readlink -f versions.json
+echo '=================== DEBUG ==================='
+readlink -e versions.json
 cat versions.json
 pwd
+find .
+echo '=================== DEBUG ==================='
 
 pip install -r requirements.txt
 
