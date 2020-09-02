@@ -36,7 +36,7 @@
     {{ disclaimer }}
   </div>
   <div class="alert alert-light" role="alert">
-    <p>Last modification: {{ mod_date }}</p>
+    <p>Last modification: {{ mod_date }} (UTC)</p>
     <p class="text-center">Made with ❤ in Spain</p>
   </div>
 </div>
