@@ -1,6 +1,7 @@
 #!/bin/bash
 
 echo '=================== Previous versions.json ==================='
+readlink -f versions.json
 cat versions.json
 
 pip install -r requirements.txt

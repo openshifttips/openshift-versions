@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron:  '12 * * * *'
+    - cron:  '56 * * * *'
 
 jobs:
   runpublish:
@@ -31,7 +31,7 @@ jobs:
       env:
         cache-name: versions-json
       with:
-        path: ~/versions.json
+        path: /github/workspace/versions.json
         key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/versions.json/*') }}
         restore-keys: |
           ${{ runner.os }}-${{ env.cache-name }}-
