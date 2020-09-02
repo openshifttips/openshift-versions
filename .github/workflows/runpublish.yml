@@ -31,7 +31,7 @@ jobs:
       env:
         cache-name: versions-json
       with:
-        path: /github/workspace/versions.json
+        path: versions.json
         key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/versions.json/*') }}
         restore-keys: |
           ${{ runner.os }}-${{ env.cache-name }}-
