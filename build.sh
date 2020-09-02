@@ -3,6 +3,7 @@
 echo '=================== Previous versions.json ==================='
 readlink -f versions.json
 cat versions.json
+pwd
 
 pip install -r requirements.txt
 
