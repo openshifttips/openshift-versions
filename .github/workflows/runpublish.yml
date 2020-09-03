@@ -21,18 +21,16 @@ jobs:
         cache-name: pip
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/requirements/*') }}
-        restore-keys: |
-          ${{ runner.os }}-${{ env.cache-name }}-
-          ${{ runner.os }}-
+        key: ${{ env.cache-name }}-${{ hashFiles('**/requirements/*') }}
 
+    # Cache versions.json so it doesn't update the site if there are no changes
     - name: versions.json cache
       uses: actions/cache@v2.1.1
       env:
         cache-name: versions-json
       with:
         path: versions.json
-        key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/versions.json') }}
+        key: ${{ env.cache-name }}-${{ hashFiles('**/versions.json') }}
 
     - name: Run publish
       uses: iranzo/gh-action-runpublish@0.0.4
