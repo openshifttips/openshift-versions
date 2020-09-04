@@ -30,7 +30,7 @@ jobs:
         cache-name: versions-json
       with:
         path: versions.json
-        key: ${{ env.cache-name }}-${{ hashFiles('**/versions.json') }}
+        key: ${{ env.cache-name }}-${{ hashFiles('versions.json') }}
 
     - name: Run publish
       uses: iranzo/gh-action-runpublish@0.0.4
