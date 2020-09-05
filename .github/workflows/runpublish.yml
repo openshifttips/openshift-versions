@@ -30,7 +30,8 @@ jobs:
         cache-name: versions-json
       with:
         path: versions.json
-        key: ${{ env.cache-name }}-${{ hashFiles('versions.json') }}
+        key: versions-json-${{ github.run_id }}
+        restore-keys: versions-json-
 
     - name: Run publish
       uses: iranzo/gh-action-runpublish@0.0.4
