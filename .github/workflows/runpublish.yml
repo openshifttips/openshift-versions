@@ -18,20 +18,21 @@ jobs:
     - name: pip cache
       uses: actions/cache@v2.1.1
       env:
-        cache-name: pip
+        cache-name: cache-pip
       with:
         path: ~/.cache/pip
         key: ${{ env.cache-name }}-${{ hashFiles('**/requirements/*') }}
+        restore-keys: ${{ env.cache-name }}-
 
     # Cache versions.json so it doesn't update the site if there are no changes
     - name: versions.json cache
       uses: actions/cache@v2.1.1
       env:
-        cache-name: versions-json
+        cache-name: cache-versions-json
       with:
         path: versions.json
-        key: versions-json-${{ github.run_id }}
-        restore-keys: versions-json-
+        key: ${{ env.cache-name }}-${{ github.run_id }}
+        restore-keys: ${{ env.cache-name }}-
 
     - name: Run publish
       uses: iranzo/gh-action-runpublish@0.0.4
