@@ -28,7 +28,7 @@ URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
 # https://github.com/openshift/cincinnati-graph-data/tree/master/channels
 CHANNELS = ["fast-4.", "stable-4.", "candidate-4."]
 HEADERS = {"accept": "application/json"}
-EMPTYRESPONSE = {"nodes": [], "edges": []}
+EMPTYRESPONSE = {'version': 1, 'nodes': [], 'edges': [], 'conditionalEdges': []}
 
 TITLE = "OpenShift 4 latest versions per channel"
 DISCLAIMER = """
@@ -57,7 +57,7 @@ def extract_values(obj, key):
         return arr
 
     results = extract(obj, arr, key)
-    return results
+    return results[1:]
 
 
 def get_versions():
