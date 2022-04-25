@@ -23,6 +23,7 @@ import jinja2
 import semantic_version
 
 from datetime import datetime
+from natsort import natsorted
 
 URL = "https://api.openshift.com/api/upgrades_info/v1/graph"
 # https://github.com/openshift/cincinnati-graph-data/tree/master/channels
@@ -82,7 +83,7 @@ def get_versions():
             else:
                 failed += 1
         minor += 1
-    return dict(sorted(versions.items(), key=lambda kv: kv[0]))
+    return dict(natsorted(versions.items(), key=lambda kv: kv[0]))
 
 
 def main():
