@@ -112,7 +112,7 @@ def main():
     template = env.get_template("index.template")
 
     latest = currentvers[
-        list({k: v for k, v in currentvers.items() if k.startswith("fast-")})[-1]
+        list({k: v for k, v in currentvers.items() if k.startswith("stable-")})[-1]
     ]
 
     mod_date = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
