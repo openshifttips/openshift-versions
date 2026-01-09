@@ -1,3 +1,6 @@
+This project is now archived.
+
+
 # openshift-versions
 
 Run the python script to generate an html page with the list of the latest OpenShift 4 versions.
